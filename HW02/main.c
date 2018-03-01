@@ -34,14 +34,13 @@ int main (int argc, char **argv) {
   do {
       p = randXbitInt(n);
   } 
-  while (isProbablyPrime(p)) {
-      int q = (p-1) / 2;
-  }
+  while (isProbablyPrime(p)); 
+  
   printf("p = %u is probably prime.\n", p);
 
   /* Q3.2: Use isProbablyPrime and randomXbitInt to find a new random n-bit prime number 
      which satisfies p=2*q+1 where q is also prime */
-  int q;
+  int q = (p-1) / 2;
 
 	printf("p = %u is probably prime and equals 2*q + 1. q= %u and is also probably prime.\n", p, q);  
 

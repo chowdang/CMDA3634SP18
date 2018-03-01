@@ -18,8 +18,9 @@ unsigned int modprod(unsigned int a, unsigned int b, unsigned int p) {
     unsigned int ab = 0;
     for (int k=0;k<i;k++) {
         if (dtoB[k]==1) ab = (ab+za)%p;
+	}
         za = 2*za%p
-    }
+    
     return ab;
 }
 
@@ -94,20 +95,21 @@ unsigned int isProbablyPrime(unsigned int N) {
   int r = 0;
   int d;
   int y = N - 1;
-    
+  if ((N-1)%2 == 0)
+{    
   do {
       y = y / 2;
       r = r + 1;
   }
-  while (y%2==0) {
-      return d = y;
+  while (y%2==0);
+       d = y;
   }
   else {
-      return d = y;
-      return r = 0;
+       d = y;
+       r = 0;
   }
  for (unsigned int n=0;n<NsmallPrimes;n++) {
-    int x = modExp(a,d,N)
+    int x = modExp(n,d,N)
     if (x=1 || x=N+1) {
         continue;
     }
