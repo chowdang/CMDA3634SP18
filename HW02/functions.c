@@ -2,13 +2,13 @@
 #include <stdlib.h>
 #include <math.h>
 
-#include "functions"
+#include "functions.h"
 
 
 //compute a*b mod p safely
 unsigned int modprod(unsigned int a, unsigned int b, unsigned int p) {
   /* Q1.2: Complete this function */
-    int dtoB[100]
+    int dtoB[100];
     int i = 1;
     while(b>0) {
         dtoB[i++] = b % 2;
@@ -16,10 +16,10 @@ unsigned int modprod(unsigned int a, unsigned int b, unsigned int p) {
     }
     unsigned int za = a;
     unsigned int ab = 0;
-    for (int k=0;k<i;k++) {
-        if (dtoB[k]==1) ab = (ab+za)%p;
-	}
-        za = 2*za%p
+    for (int j=0;j<i;j++) {
+        if (dtoB[j]==1) ab = (ab+za)%p;
+    }
+    za = 2*za%p;
     
     return ab;
 }
@@ -27,7 +27,7 @@ unsigned int modprod(unsigned int a, unsigned int b, unsigned int p) {
 //compute a^b mod p safely
 unsigned int modExp(unsigned int a, unsigned int b, unsigned int p) {
   /* Q1.3: Complete this function */
-    int dtoB[100]
+    int dtoB[100];
     int i = 1;
     while(b>0) {
         dtoB[i++] = b % 2;
@@ -35,12 +35,13 @@ unsigned int modExp(unsigned int a, unsigned int b, unsigned int p) {
     }
     unsigned int z = a;
     unsigned int aExpob = 1;
-    for (int k=0;k<i;k++) {
-        if (dtoB[k]==1) aExpob = modProb(aExpob,z,p;
-        z = modProd(z,z,p)
+    int j;
+    for (j=0;j<i;j++) {
+        if (dtoB[j]==1)
+            aExpob = modprod(aExpob,z,p);
+        z = modprod(z,z,p);
     }
     return aExpob;
-
 }
 
 //returns either 0 or 1 randomly
@@ -85,6 +86,7 @@ unsigned int isProbablyPrime(unsigned int N) {
                                 937, 941, 947, 953, 967, 971, 977, 983, 
                                 991, 997};
   //before using a probablistic primality check, check directly using the small primes list
+  unsigned int k;
   for (unsigned int n=1;n<NsmallPrimes;n++) {
     if (N==smallPrimeList[n])   return 1; //true
     if (N%smallPrimeList[n]==0) return 0; //false
@@ -108,23 +110,29 @@ unsigned int isProbablyPrime(unsigned int N) {
        d = y;
        r = 0;
   }
- for (unsigned int n=0;n<NsmallPrimes;n++) {
-    int x = modExp(n,d,N)
-    if (x=1 || x=N+1) {
+ for (k==0;k<NsmallPrimes;k++) {
+    int x = modExp(k,d,N);
+    if (x==1 || x==N+1) {
         continue;
     }
+    int i;
     for (i=1;i<r-1;i++) {
-        if (x=1) {
+        if (x==1) {
             return 0;
         }
-        if (x=N-1) {
+        if (x==N-1) {
             continue; 
         }
     return 0;
     }
   return 1; //true
 }
+}
 //Finds a generator of Z_p using the assumption that p=2*q+1
 unsigned int findGenerator(unsigned int p) {
   /* Q3.3: complete this function and use the fact that p=2*q+1 to quickly find a generator */
+  for (int g==2;g<p;g++) {
+      int 
+  }
+  return 0;
 }
