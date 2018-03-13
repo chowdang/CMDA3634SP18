@@ -12,7 +12,7 @@ int main(int argc, char **argv) {
       exit(1);
   }
   int arg1 = atoi(argv[0]);
-  omp_set_num_threads(10);
+  omp_set_num_thread(10);
   int Nthreads = 1;
   
   struct drand48_data *drandData; 
@@ -20,9 +20,12 @@ int main(int argc, char **argv) {
 
   // Q2c: add an OpenMP parallel region here, wherein each thread initializes 
   //      one entry in drandData using srand48_r and seed based on thread number
+#pragma omp parallel
+{  
   long int seed = 0;
-  srand48_r(seed, drandData+0);
-
+  int rank = omp_get_thread_num();
+  srand48_r(seed, drandData+rank);
+}
   long long int Ntrials = 10000000;
 
 
