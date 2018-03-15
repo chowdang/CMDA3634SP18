@@ -12,7 +12,7 @@ int main(int argc, char **argv) {
       exit(1);
   }
   int arg1 = atoi(argv[0]);
-  omp_set_num_thread(10);
+  omp_set_num_threads(10);
   int Nthreads = 1;
   
   struct drand48_data *drandData; 
