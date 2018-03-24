@@ -25,6 +25,8 @@ int main (int argc, char **argv) {
 
   /* Q3.1 Make rank 0 setup the ELGamal system and
     broadcast the public key information */
+unsigned int p, g, h, x;
+if (rank == 0) {
   printf("Enter a number of bits: "); fflush(stdout);
   char status = scanf("%u",&n);
 
@@ -36,11 +38,13 @@ int main (int argc, char **argv) {
   printf("\n");
 
   //declare storage for an ElGamal cryptosytem
-  unsigned int p, g, h, x;
 
   //setup an ElGamal cryptosystem
   setupElGamal(n,&p,&g,&h,&x);
-
+}
+  MPI_Bcast(&p,1,MPI_UNSIGNED,0,MPI_COMM_WORLD);
+  MPI_Bcast(&g,1,MPI_UNSIGNED,0,MPI_COMM_WORLD);
+  MPI_Bcast(&h,1,MPI_UNSIGNED,0,MPI_COMM_WORLD);
 
 
   //Suppose we don't know the secret key. Use all the ranks to try and find it in parallel
@@ -53,8 +57,8 @@ int main (int argc, char **argv) {
   unsigned int N = p-1; //total loop size
   unsigned int start, end;
   
-  start = 0; 
-  end = start + N;
+  start = ((N)/size/rank); 
+  end = start + ((N)/size);
 
   //loop through the values from 'start' to 'end'
   for (unsigned int i=start;i<end;i++) {
