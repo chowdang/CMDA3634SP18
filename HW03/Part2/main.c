@@ -57,15 +57,22 @@ if (rank == 0) {
   unsigned int N = p-1; //total loop size
   unsigned int start, end;
   
-  start = ((N)/size/rank); 
-  end = start + ((N)/size);
+  start = ((N)/size*rank); 
+  end = start + (N)/size;
 
   //loop through the values from 'start' to 'end'
+  double t, t1, t2;
+  t1 = MPI_Wtime();
   for (unsigned int i=start;i<end;i++) {
     if (modExp(g,i+1,p)==h)
-      printf("Secret key found! x = %u \n", i);
+      printf("Secret key found! x = %u \n", i+1);
   }
-
+  MPI_Barrier(MPI_COMM_WORLD);
+  t2 = MPI_Wtime();
+  t = t2 - t1;
+if (rank == 2) {
+  printf("Run time found! %f, %f\n", t, N/t);
+}
   MPI_Finalize();
 
   return 0;
