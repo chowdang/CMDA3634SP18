@@ -70,7 +70,7 @@ if (rank == 0) {
   MPI_Barrier(MPI_COMM_WORLD);
   t2 = MPI_Wtime();
   t = t2 - t1;
-if (rank == 2) {
+if (rank == 0) {
   printf("Run time found! %f, %f\n", t, N/t);
 }
   MPI_Finalize();
