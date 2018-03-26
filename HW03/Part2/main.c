@@ -62,7 +62,9 @@ if (rank == 0) {
 
   //loop through the values from 'start' to 'end'
   double t, t1, t2;
+if (rank == 0) {
   t1 = MPI_Wtime();
+}
   for (unsigned int i=start;i<end;i++) {
     if (modExp(g,i+1,p)==h)
       printf("Secret key found! x = %u \n", i+1);
