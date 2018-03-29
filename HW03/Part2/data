@@ -1,0 +1,85 @@
+nr115: mpiexec -np 1 main
+Enter a number of bits: 15
+
+ElGamal Setup successful.
+p = 28211. 
+g = 90 is a generator of Z_28211 
+Secret key: x = 4254 
+h = g^x = 3253
+
+Using 1 processes to find the secret key...
+Secret key found! x = 4254 
+Run time found! 0.064393, 438090.800788
+nr115: mpiexec -np 2 main
+Enter a number of bits: 15
+
+ElGamal Setup successful.
+p = 28211. 
+g = 90 is a generator of Z_28211 
+Secret key: x = 4254 
+h = g^x = 3253
+
+Using 2 processes to find the secret key...
+Secret key found! x = 4254 
+Run time found! 0.034902, 808266.439692
+nr115: mpiexec -np 4 main
+Enter a number of bits: 15
+
+ElGamal Setup successful.
+p = 28211. 
+g = 90 is a generator of Z_28211 
+Secret key: x = 4254 
+h = g^x = 3253
+
+Using 4 processes to find the secret key...
+Secret key found! x = 4254 
+Run time found! 0.018079, 1560370.252014
+nr115: mpiexec -np 8 main
+Enter a number of bits: 15
+
+ElGamal Setup successful.
+p = 28211. 
+g = 90 is a generator of Z_28211 
+Secret key: x = 4254 
+h = g^x = 3253
+
+Using 8 processes to find the secret key...
+Secret key found! x = 4254 
+Run time found! 0.009018, 3128207.377327
+nr115: mpiexec -np 12 main
+Enter a number of bits: 15
+
+ElGamal Setup successful.
+p = 19183. 
+g = 13854 is a generator of Z_19183 
+Secret key: x = 12591 
+h = g^x = 12096
+
+Using 12 processes to find the secret key...
+Secret key found! x = 12591 
+Run time found! 0.004423, 4336736.703752
+nr115: mpiexec -np 16 main
+Enter a number of bits: 15
+
+ElGamal Setup successful.
+p = 32299. 
+g = 15071 is a generator of Z_32299 
+Secret key: x = 16750 
+h = g^x = 15603
+
+Using 16 processes to find the secret key...
+Secret key found! x = 16750 
+Run time found! 0.005979, 5402066.857758
+nr115: mpiexec -np 20 main
+Enter a number of bits: 15
+
+ElGamal Setup successful.
+p = 32299. 
+g = 15071 is a generator of Z_32299 
+Secret key: x = 16750 
+h = g^x = 15603
+
+Using 20 processes to find the secret key...
+Secret key found! x = 16750 
+Run time found! 0.005107, 6324352.501961
+
