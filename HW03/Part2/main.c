@@ -73,7 +73,7 @@ if (rank == 0) {
   t2 = MPI_Wtime();
   t = t2 - t1;
 if (rank == 0) {
-  printf("Run time found! %f, %f\n", t, N/t);
+  printf("Runtime found! %f, %f\n", t, N/t);
 }
   MPI_Finalize();
 
