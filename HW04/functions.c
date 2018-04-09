@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
+#include<ctype.h>
 
 #include "functions.h"
 
@@ -152,7 +153,7 @@ void ElGamalEncrypt(unsigned int *m, unsigned int *a, unsigned int Nints,
                     unsigned int p, unsigned int g, unsigned int h) {
 
   /* Q2.1 Parallelize this function with OpenMP   */
-
+  #pragma omp parallel for
   for (unsigned int i=0; i<Nints;i++) {
     //pick y in Z_p randomly
     unsigned int y;
@@ -175,7 +176,7 @@ void ElGamalDecrypt(unsigned int *m, unsigned int *a, unsigned int Nints,
                     unsigned int p, unsigned int x) {
 
   /* Q2.1 Parallelize this function with OpenMP   */
-
+  #pragma omp parallel for
   for (unsigned int i=0; i<Nints;i++) {
     //compute s = a^x
     unsigned int s = modExp(a[i],x,p);
@@ -192,6 +193,11 @@ void ElGamalDecrypt(unsigned int *m, unsigned int *a, unsigned int Nints,
 // Assume there is enough allocated storage for the padded string 
 void padString(unsigned char* string, unsigned int charsPerInt) {
 
+  while (strlen(string) % charsPerInt !=0) {
+
+     strcat(string, " ");
+
+  }
   /* Q1.2 Complete this function   */
 
 }
@@ -200,7 +206,34 @@ void padString(unsigned char* string, unsigned int charsPerInt) {
 void convertStringToZ(unsigned char *string, unsigned int Nchars,
                       unsigned int  *Z,      unsigned int Nints) {
 
+  unsigned int space = Nchars / Nints;
+  if (space == 1) {
+     
+     #pragma omp parallel for
+     for (int i = 0; i < strlen(string); i++) {
+         Z[i] = (unsigned int)string[i];
+     }
+
+  }
+  if (space == 2) {
+     
+     #pragma omp parallel for
+     for (int i = 0; i < strlen(string); i++) {
+         unsigned int position = i / 2;
+         Z[position] = (unsigned int)string[i] * 256 + (unsigned int)string[i + 1];
+     }
+  }
+  if (space == 3) {
+     #pragma omp parallel for
+     for (int i = 0; i < strlen(string); i++) {
+         if (i % 3 == 0) {
+            unsigned int position = i / 3;
+            Z[position] = (unsigned int)string[i] * 65536 + (unsigned int)string[i + 1] * 256 + (unsigned int)string[i + 2];      
+         }  
+     }
+  }
   /* Q1.3 Complete this function   */
+  
   /* Q2.2 Parallelize this function with OpenMP   */
 
 }
@@ -208,9 +241,33 @@ void convertStringToZ(unsigned char *string, unsigned int Nchars,
 
 void convertZToString(unsigned int  *Z,      unsigned int Nints,
                       unsigned char *string, unsigned int Nchars) {
+  unsigned int space = Nchars / Nints;
+  if (space == 1) {
+     
+     #pragma omp parallel for
+     for (int i = 0; i < Nints; i++) {
+         string[i] = (unsigned char)Z[i];
+     }
 
+  }
+  if (space == 2) {
+     
+     #pragma omp parallel for
+     for (int i = 0; i < Nints; i++) {
+         string[i*2] = (unsigned char)(Z[i]/256);
+         string[i*2 + 1] = (unsigned char)(Z[i]%256);
+     }
+  }
+  if (space == 3) {
+     #pragma omp parallel for
+     for (int i = 0; i < Nints; i++) {
+            string[i*3] = (unsigned char)(Z[i]/65536);
+            string[i*3 + 1] = (unsigned char)((Z[i]%256)/256);
+            string[i*3 + 2] = (unsigned char)(Z[i]%65536);
+         }  
+  }
+   
   /* Q1.4 Complete this function   */
   /* Q2.2 Parallelize this function with OpenMP   */
 
 }
-
