@@ -252,7 +252,7 @@ void convertZToString(unsigned int  *Z,      unsigned int Nints,
      
      #pragma omp parallel for
      for (int i = 0; i < Nints; i++) {
-         string[i*2] = (unsigned char)(Z[i]/256);
+         string[i*2] = (unsigned char)(Z[i]/256%256);
          string[i*2 + 1] = (unsigned char)(Z[i]%256);
      }
   }
@@ -260,8 +260,8 @@ void convertZToString(unsigned int  *Z,      unsigned int Nints,
      #pragma omp parallel for
      for (int i = 0; i < Nints; i++) {
             string[i*3] = (unsigned char)(Z[i]/65536);
-            string[i*3 + 1] = (unsigned char)((Z[i]%256)/256);
-            string[i*3 + 2] = (unsigned char)(Z[i]%65536);
+            string[i*3 + 1] = (unsigned char)((Z[i]/256)%256);
+            string[i*3 + 2] = (unsigned char)(Z[i]%256);
          }  
   }
    

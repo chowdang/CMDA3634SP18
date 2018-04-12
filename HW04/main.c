@@ -9,7 +9,7 @@
 
 int main (int argc, char **argv) {
 
-  int Nthreads = 1;
+  int Nthreads = 4;
 
   omp_set_num_threads(Nthreads);
 
@@ -89,7 +89,7 @@ int main (int argc, char **argv) {
   /* Q2.3 Parallelize this loop with OpenMP   */
   double startTime = omp_get_wtime();
   int chow = 0;
-#pragma omp shared(chow)
+ #pragma omp shared(chow)
  {
   #pragma omp for
   for (unsigned int i=0;i<p-1;i++) {
@@ -108,6 +108,7 @@ int main (int argc, char **argv) {
 
   printf("Searching all keys took %g seconds, throughput was %g values tested per second.\n", totalTime, throughput);
 
-  return 0;
+  return 0; 
  }
 }
+
