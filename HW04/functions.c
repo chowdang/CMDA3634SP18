@@ -219,15 +219,19 @@ void convertStringToZ(unsigned char *string, unsigned int Nchars,
      
      #pragma omp parallel for
      for (int i = 0; i < strlen(string); i++) {
-         unsigned int position = i / 2;
-         Z[position] = (unsigned int)string[i] * 256 + (unsigned int)string[i + 1];
+         if (i%2 == 0) {
+            unsigned int position = i / 2;
+            Z[position] = (unsigned int)string[i] * 256 + (unsigned int)string[i + 1];
+         }
      }
   }
   if (space == 3) {
      #pragma omp parallel for
      for (int i = 0; i < strlen(string); i++) {
-          unsigned int position = i / 3;
-          Z[position] = (unsigned int)string[i] * 65536 + (unsigned int)string[i + 1] * 256 + (unsigned int)string[i + 2];      
+          if (i%3 == 0) {
+             unsigned int position = i / 3;
+             Z[position] = (unsigned int)string[i] * 65536 + (unsigned int)string[i + 1] * 256 + (unsigned int)string[i + 2];
+          }      
      }
   }
   /* Q1.3 Complete this function   */
