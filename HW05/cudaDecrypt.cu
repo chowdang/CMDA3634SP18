@@ -42,7 +42,7 @@ __global__ void madan(unsigned int *p, unsigned int *g, unsigned int *h, unsigne
 
     if (modExp(*g, id + 1, *p) == *h) {
 
-       x = id + 1;
+       *x = id + 1;
        printf("Secret Key Found! x = %u \n", id + 1);
   
     } 
