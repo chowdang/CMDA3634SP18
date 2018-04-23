@@ -24,8 +24,8 @@ __device__ unsigned int kmodExp(unsigned int a, unsigned int b, unsigned int p) 
   unsigned int aExpb = 1;
 
   while (b > 0) {
-    if (b%2 == 1) aExpb = modprod(aExpb, z, p);
-    z = modprod(z, z, p);
+    if (b%2 == 1) aExpb = kmodprod(aExpb, z, p);
+    z = kmodprod(z, z, p);
     b /= 2;
   }
   return aExpb;
@@ -40,7 +40,7 @@ __global__ void madan(unsigned int *p, unsigned int *g, unsigned int *h, unsigne
    int id = threadid + blockid * Nblock;
    if (id < *p - 1) {
 
-    if (modExp(*g, id + 1, *p) == *h) {
+    if (kmodExp(*g, id + 1, *p) == *h) {
 
        *x = id + 1;
        printf("Secret Key Found! x = %u \n", id + 1);
