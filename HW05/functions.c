@@ -90,7 +90,6 @@ unsigned int isProbablyPrime(unsigned int N) {
     r += 1;
   }
   
-  unsigned int n;
   for (n=0;n<NsmallPrimes;n++) {
     unsigned int k = smallPrimeList[n];
     unsigned int x = modExp(k,d,N);
@@ -214,7 +213,8 @@ void convertStringToZ(unsigned char *string, unsigned int Nchars,
   int i;
   for (i=0; i<Nints; i++) {
     Z[i] = 0;
-    for (int n=0;n<charsPerInt;n++) {
+    int n;
+    for (n=0;n<charsPerInt;n++) {
       Z[i] *= 256; //shift left by 8 bits
       Z[i] += (unsigned int) string[i*charsPerInt + n]; //add the next character as a uint
     }
