@@ -45,7 +45,8 @@ int main (int argc, char **argv) {
   ElGamalEncrypt(Zmessage, a, Nints, p, g, h);
   
   fprintf(m, "%d\n", Nints);
-  for (unsigned int i = 0; i<Nints; i++) {
+  unsigned int i;
+  for (i = 0; i<Nints; i++) {
     fprintf(m, "%d %d\n", Zmessage[i], a[i]);
   }
   
