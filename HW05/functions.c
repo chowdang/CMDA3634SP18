@@ -39,7 +39,8 @@ unsigned int randomBit() {
 //returns a random integer which is between 2^{n-1} and 2^{n}
 unsigned int randXbitInt(unsigned int n) {
   unsigned int r = 1;
-  for (unsigned int i=0; i<n-1; i++) {
+  unsigned int i;
+  for (i=0; i<n-1; i++) {
     r = r*2 + randomBit();
   }
   return r;
@@ -74,7 +75,8 @@ unsigned int isProbablyPrime(unsigned int N) {
                                 991, 997};
 
   //before using a probablistic primality check, check directly using the small primes list
-  for (unsigned int n=1;n<NsmallPrimes;n++) {
+  unsigned int n;
+  for (n=1;n<NsmallPrimes;n++) {
     if (N==smallPrimeList[n])   return 1; //true
     if (N%smallPrimeList[n]==0) return 0; //false
   }
@@ -87,14 +89,16 @@ unsigned int isProbablyPrime(unsigned int N) {
     d /= 2;
     r += 1;
   }
-
-  for (unsigned int n=0;n<NsmallPrimes;n++) {
+  
+  unsigned int n;
+  for (n=0;n<NsmallPrimes;n++) {
     unsigned int k = smallPrimeList[n];
     unsigned int x = modExp(k,d,N);
 
     if ((x==1) || (x==N-1)) continue;
-
-    for (unsigned int i=1;i<r-1;i++) {
+    
+    unsigned int i;
+    for (i=1; i<r - 1; i++) {
       x = modprod(x,x,N);
       if (x == 1) return 0; //false
       if (x == N-1) break;
@@ -151,8 +155,9 @@ void setupElGamal(unsigned int n, unsigned int *p, unsigned int *g,
 
 void ElGamalEncrypt(unsigned int *m, unsigned int *a, unsigned int Nints, 
                     unsigned int p, unsigned int g, unsigned int h) {
-
-  for (unsigned int i=0; i<Nints;i++) {
+  
+  unsigned int i;
+  for (i=0; i<Nints;i++) {
     //pick y in Z_p randomly
     unsigned int y;
     do {
@@ -172,8 +177,9 @@ void ElGamalEncrypt(unsigned int *m, unsigned int *a, unsigned int Nints,
 
 void ElGamalDecrypt(unsigned int *m, unsigned int *a, unsigned int Nints,
                     unsigned int p, unsigned int x) {
-
-  for (unsigned int i=0; i<Nints;i++) {
+  
+  unsigned int i;
+  for (i=0; i<Nints;i++) {
     //compute s = a^x
     unsigned int s = modExp(a[i],x,p);
 
@@ -191,8 +197,9 @@ void padString(unsigned char* string, unsigned int charsPerInt) {
 
   int length    = mystrlen(string);
   int newlength = (length%charsPerInt==0) ? length : length + charsPerInt-length%charsPerInt;
-
-  for (int i=length; i<newlength; i++) {
+  
+  int i;
+  for (i=length; i<newlength; i++) {
     string[i] = ' ';
   }
   string[newlength] = '\0';
@@ -203,8 +210,9 @@ void convertStringToZ(unsigned char *string, unsigned int Nchars,
                       unsigned int  *Z,      unsigned int Nints) {
 
   unsigned int charsPerInt = Nchars/Nints;
-
-  for (int i=0; i<Nints; i++) {
+  
+  int i;
+  for (i=0; i<Nints; i++) {
     Z[i] = 0;
     for (int n=0;n<charsPerInt;n++) {
       Z[i] *= 256; //shift left by 8 bits
@@ -218,10 +226,12 @@ void convertZToString(unsigned int  *Z,      unsigned int Nints,
                       unsigned char *string, unsigned int Nchars) {
 
   unsigned int charsPerInt = Nchars/Nints;
-
-  for (int i=0; i<Nints; i++) {
+  
+  int i;
+  for (i=0; i<Nints; i++) {
     unsigned int z = Z[i];
-    for (int n=0;n<charsPerInt;n++) {
+    int n;
+    for (n=0;n<charsPerInt;n++) {
       string[i*charsPerInt + charsPerInt -1 - n] = z%256; // recover the character in the first 8 bits
       z /= 256; //shift right 8 bits
     }
