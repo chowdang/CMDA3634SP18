@@ -32,7 +32,8 @@ int main (int argc, char **argv) {
       (unsigned int *) malloc(Nints*sizeof(unsigned int));
   unsigned int *a =
       (unsigned int *) malloc(Nints*sizeof(unsigned int));
-  for (unsigned int i = 0; i<Nints; i++) {
+  unsigned int i;
+  for (i = 0; i<Nints; i++) {
     fscanf(m, "%d %d\n", &Zmessage[i], &a[i]);
   }
 
@@ -42,7 +43,8 @@ int main (int argc, char **argv) {
   if (x==0 || modExp(g,x,p)!=h) {
     printf("Finding the secret key...\n");
     double startTime = clock();
-    for (unsigned int i=0;i<p-1;i++) {
+    unsigned int i;
+    for (i=0;i<p-1;i++) {
       if (modExp(g,i+1,p)==h) {
         printf("Secret key found! x = %u \n", i+1);
         x=i+1;
