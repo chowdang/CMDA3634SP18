@@ -123,6 +123,6 @@ int main (int argc, char **argv) {
   convertZToString(Zmessage, Nints, message, Nints * charsPerInt );
   /* Q4 Make the search for the secret key parallel on the GPU using CUDA. */
    //declare storage for an ElGamal cryptosytem
-  pintf("%s\n", m);
+  printf("%s\n", message);
   return 0;
 }
