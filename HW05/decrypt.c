@@ -64,6 +64,6 @@ int main (int argc, char **argv) {
   unsigned char *message = (unsigned char *) malloc(bufferSize*sizeof(unsigned char));
   ElGamalDecrypt(Zmessage, a, Nints, p, x);
   convertZToString(Zmessage, Nints, message, Nints * charsPerInt );
-  prinf(m, "%d\n", message);
+  prinf("%s\n", message);
   return 0;
 }
