@@ -84,14 +84,14 @@ int main (int argc, char **argv) {
   // find the secret key
   unsigned int *d_p, *d_g, *d_h, *d_x;
 
-  cudaMalloc(&d_p, sizeof(unsigned int));
-  cudaMalloc(&d_g, sizeof(unsigned int));
-  cudaMalloc(&d_h, sizeof(unsigned int));
   cudaMalloc(&d_x, sizeof(unsigned int));
+  cudaMalloc(&d_h, sizeof(unsigned int));
+  cudaMalloc(&d_g, sizeof(unsigned int));
+  cudaMalloc(&d_p, sizeof(unsigned int));
 
-  cudaMemcpy(d_p, &p, sizeof(unsigned int), cudaMemcpyHostToDevice);
-  cudaMemcpy(d_g, &g, sizeof(unsigned int), cudaMemcpyHostToDevice);
-  cudaMemcpy(d_h, &h, sizeof(unsigned int), cudaMemcpyHostToDevice);
+  cudaMemcpy(d_p, &h, sizeof(unsigned int), cudaMemcpyHostToDevice);
+  cudaMemcpy(d_g, &p, sizeof(unsigned int), cudaMemcpyHostToDevice);
+  cudaMemcpy(d_h, &g, sizeof(unsigned int), cudaMemcpyHostToDevice);
 
   int Nthreads = 1024;
   int Nblocks = (p - 1 + Nthreads - 1) / Nthreads;
@@ -111,10 +111,10 @@ int main (int argc, char **argv) {
 
     printf("Searching all keys took %g seconds, throughput was %g values tested per second.\n", totalTime, throughput);
   }
-  cudaFree(d_p);
-  cudaFree(d_g);
-  cudaFree(d_h);
   cudaFree(d_x);
+  cudaFree(d_h);
+  cudaFree(d_g);
+  cudaFree(d_p);
 
   /* Q3 After finding the secret key, decrypt the message */
   int bufferSize = 1024;
